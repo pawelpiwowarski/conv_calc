@@ -4,9 +4,9 @@ export default function ConvolutionCalculator() {
   const [inputWidth, setInputWidth] = useState(0);
   const [inputHeight, setInputHeight] = useState(0);
   const [inputChannels, setInputChannels] = useState(0);
-  const [kernelSize, setKernelSize] = useState(0);
+  const [kernelSize, setKernelSize] = useState(1);
   const [padding, setPadding] = useState(0);
-  const [stride, setStride] = useState(0);
+  const [stride, setStride] = useState(1);
   const [outputChannels, setOutputChannels] = useState(0);
   const [outputWidth, setOutputWidth] = useState(0);
   const [outputHeight, setOutputHeight] = useState(0);
@@ -132,7 +132,7 @@ className="input"
 
             type="range"
             min="0"
-            max="100"
+            max="10"
             value={padding}
             onChange={(e) => setPadding(parseInt(e.target.value))}
             id="padding"
@@ -142,7 +142,7 @@ className="input"
     className="input"
     type="number"
     min="0"
-    max="100"
+    max="10"
     value={padding}
     onChange={(e) => setPadding(parseInt(e.target.value))}
     onBlur={(e) => setPadding(parseInt(e.target.value))}
@@ -154,8 +154,8 @@ className="input"
           <input
             className="range range-accent"
             type="range"
-            min="0"
-            max="100"
+            min="1"
+            max="10"
             value={stride}
             onChange={(e) => setStride(parseInt(e.target.value))}
             id="stride"
@@ -221,7 +221,7 @@ className="range range-accent"
         Output Size
       </h1>
       <div className="flex items-center space-x-4">
-        <p> {outputWidth} x {outputWidth} x {outputChannels} </p>
+        <p> {outputWidth} x {outputHeight} x {outputChannels} </p>
 
       </div>
 
