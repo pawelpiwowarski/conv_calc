@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import PoolingCalc from '@/components/PoolingCalc';
-
+import Head from 'next/head';
 
 export default function ConvolutionCalculator() {
   const [inputWidth, setInputWidth] = useState(1);
@@ -50,7 +50,17 @@ export default function ConvolutionCalculator() {
 }, [inputWidth, inputHeight, kernelSize, padding, stride]);
 
   return (
+    
+
+
     <div className="flex flex-col items-center space-y-4">
+
+      <Head>
+        <title>Convolution and Pooling Calculator</title>
+        <meta name="description" content="Convolution and Pooling Calculator" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
     <div className="grid grid-cols-2 gap-4 pt-20">
       <h1 className="col-span-3 text-3xl font-bold text-center pb-4">
         Convolution Calculator
