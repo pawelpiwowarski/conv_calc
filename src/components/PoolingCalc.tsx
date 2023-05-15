@@ -232,11 +232,13 @@ className="range range-info"
       {
  outputWidth > 0 && (
     <div className="flex flex-col items-center space-y-4">
-      <h1 className="text-2xl font-bold text-center pb-4">
-        Output Size
+      <h1 className="text-2xl pt-4 text-center pb-4">
+        Output Size: {outputWidth} x {outputHeight} x {outputChannels}
       </h1>
+  
+
       <div className="flex items-center space-x-4 text-2xl">
-        <p> {outputWidth} x {outputHeight} x {outputChannels} </p>
+<p className="text-2xl"> After Flattening: {outputWidth * outputHeight * outputChannels} </p>
 
       </div>
       <div className="mockup-code">

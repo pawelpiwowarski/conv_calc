@@ -62,7 +62,7 @@ export default function ConvolutionCalculator() {
       </Head>
 
     <div className="grid grid-cols-2 gap-4 pt-20">
-      <h1 className="col-span-3 text-3xl font-bold text-center pb-4">
+      <h1 className="col-span-3 text-4xl font-bold text-center pb-4">
         Convolution Calculator
       </h1>
 
@@ -242,11 +242,12 @@ className="range range-accent"
 {
  outputWidth > 0 && (
     <div className="flex flex-col items-center space-y-4">
-      <h1 className="text-2xl font-bold text-center pb-4">
-        Output Size
+      <h1 className="text-2xl text-center pb- pt-4">
+        Output Size: {outputWidth} x {outputHeight} x {outputChannels}
       </h1>
-      <div className="flex items-center space-x-4 text-2xl">
-        <p> {outputWidth} x {outputHeight} x {outputChannels} </p>
+ 
+ <div className="flex items-center space-x-4 text-2xl pt-4">
+<p className="text-2xl"> After Flattening: {outputWidth * outputHeight * outputChannels} </p>
 
       </div>
       <div className="mockup-code">
@@ -278,7 +279,7 @@ kernel_size = {kernelSize}, stride={stride}, padding={padding}) </code>
 <footer className="flex items-center justify-center w-full h-24 border-t">
 
 <p className="text-center">
-  Built by {'Pawel Piwowarski'} 
+  Built with care by {'Pawel Piwowarski'} 
   </p>
   <a className="ml-2" href="https://github.com/pawelpiwowarski"
   target="_blank"
@@ -286,7 +287,7 @@ kernel_size = {kernelSize}, stride={stride}, padding={padding}) </code>
   >
     <p className="text-center underline">
 
-Github
+See Github
     </p>
   </a>
 
