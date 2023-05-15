@@ -326,7 +326,7 @@ changePass={()=> {
 <p className="text-center">
   Built with care for my precious friends by {'Pawel Piwowarski'} 
   </p>
-  <a className="ml-2" href="https://github.com/pawelpiwowarski"
+  <a className="ml-2" href="https://github.com/pawelpiwowarski/conv_calc"
   target="_blank"
   rel="noopener noreferrer"
   >
