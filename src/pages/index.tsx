@@ -271,7 +271,7 @@ className="range range-accent"
 
 
       </div>
-
+{ outputWidth * outputHeight * outputChannels > 1 &&
       
       <motion.button
         className="btn btn-s btn-outline btn-accent"
@@ -282,6 +282,7 @@ className="range range-accent"
   Move Output to Pooling
 
       </motion.button>
+}
 
       <div className="mockup-code">
       <button className="btn gap-2" onClick={handleCopyClick}>
