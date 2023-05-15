@@ -258,8 +258,8 @@ className="range range-accent"
 
 
 
-{
- outputWidth > 0 && (
+
+
     <div className="flex flex-col items-center space-y-4">
       <h1 className="text-2xl text-center pb- pt-4">
         Output Size: {outputWidth} x {outputHeight} x {outputChannels}
@@ -305,7 +305,7 @@ kernel_size = {kernelSize}, stride={stride}, padding={padding}) </code>
     </div>
   )
 
-}
+
 <div ref={poolingRef} />
 <PoolingCalc pass={passing} height={outputHeight} width={outputWidth} channels={outputChannels}
 

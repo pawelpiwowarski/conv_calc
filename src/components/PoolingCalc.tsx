@@ -262,8 +262,8 @@ className="range range-info"
     
       </div>
 
-      {
- outputWidth > 0 && (
+      
+
     <div className="flex flex-col items-center space-y-4">
       <h1 className="text-2xl pt-4 text-center pb-4">
         Output Size: {outputWidth} x {outputHeight} x {outputChannels}
@@ -307,9 +307,9 @@ kernel_size = {kernelSize}, stride={stride}, padding={padding}) </code>
 </div>
 
     </div>
-  )
+  
 
-}
+
 
       </div>
 
