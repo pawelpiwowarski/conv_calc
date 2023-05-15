@@ -121,7 +121,7 @@ className="input"
   <input 
     className="range range-accent"
     type="range"
-    min="0"
+    min="1"
     max="100"
     value={kernelSize}
     onChange={(e) => setKernelSize(parseInt(e.target.value))}
@@ -130,7 +130,7 @@ className="input"
   <input 
     className="input"
     type="number"
-    min="0"
+    min="1"
     max="100"
     value={kernelSize}
     onChange={(e) => setKernelSize(parseInt(e.target.value))}
@@ -176,7 +176,7 @@ className="input"
    <input 
     className="input"
     type="number"
-    min="0"
+    min="1"
     max="100"
     value={stride}
     onChange={(e) => setStride(parseInt(e.target.value))}

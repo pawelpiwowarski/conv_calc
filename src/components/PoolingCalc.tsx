@@ -123,7 +123,7 @@ className="input"
   <input 
     className="range range-accent"
     type="range"
-    min="0"
+    min="1"
     max="100"
     value={kernelSize}
     onChange={(e) => setKernelSize(parseInt(e.target.value))}
@@ -132,7 +132,7 @@ className="input"
   <input 
     className="input"
     type="number"
-    min="0"
+    min="1"
     max="100"
     value={kernelSize}
     onChange={(e) => setKernelSize(parseInt(e.target.value))}
@@ -140,7 +140,7 @@ className="input"
   />
 </div>
 <div className="flex items-center space-x-4">
-          <label htmlFor="inputHeight">Padding:</label>
+          <label className="text-orange-800" htmlFor="inputHeight">Padding: (Usually 0 in pooling)</label>
           <input
             className="range range-accent"
 
@@ -179,7 +179,7 @@ className="input"
    <input 
     className="input"
     type="number"
-    min="0"
+    min="1"
     max="100"
     value={stride}
     onChange={(e) => setStride(parseInt(e.target.value))}
