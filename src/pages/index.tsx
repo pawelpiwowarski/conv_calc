@@ -1,6 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from "react";
+
 import PoolingCalc from '@/components/PoolingCalc';
 import Head from 'next/head';
+import { motion } from "framer-motion";
+
 
 export default function ConvolutionCalculator() {
   const [inputWidth, setInputWidth] = useState(1);
@@ -14,6 +17,22 @@ export default function ConvolutionCalculator() {
   const [outputHeight, setOutputHeight] = useState(0);
   const [isCopied, setIsCopied] = useState(false);
   const [isKerasCopied, setIsKerasCopied] = useState(false);
+
+  const [passing, setPassing] = useState(false);
+
+
+  const poolingRef = useRef<HTMLDivElement>(null);
+  const convRef = useRef<HTMLDivElement>(null);
+
+  const handleClick = () => {
+
+    setPassing(!passing);
+
+    if (poolingRef.current) {
+      poolingRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
 
   function handleKerasCopyClick() {
     const code = ` tf.keras.layers.Conv2D(filters=${outputChannels}, kernel_size=${kernelSize}, strides=${stride}, padding=${padding? "same" : "valid"}, input_shape=(${inputWidth}, ${inputHeight}, ${inputChannels}))`;
@@ -60,7 +79,7 @@ export default function ConvolutionCalculator() {
         <meta name="description" content="Convolution and Pooling Calculator" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+    <div ref={convRef} />
     <div className="grid grid-cols-2 gap-4 pt-20">
       <h1 className="col-span-3 text-4xl font-bold text-center pb-4">
         Convolution Calculator
@@ -248,8 +267,22 @@ className="range range-accent"
  
  <div className="flex items-center space-x-4 text-2xl pt-4">
 <p className="text-2xl"> After Flattening: {outputWidth * outputHeight * outputChannels} </p>
+<br/>
+
 
       </div>
+
+      
+      <motion.button
+        className="btn btn-s btn-outline btn-accent"
+        onClick={handleClick}
+
+      >
+
+  Move Output to Pooling
+
+      </motion.button>
+
       <div className="mockup-code">
       <button className="btn gap-2" onClick={handleCopyClick}>
   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
@@ -273,11 +306,22 @@ kernel_size = {kernelSize}, stride={stride}, padding={padding}) </code>
 
 }
 
-<PoolingCalc ></PoolingCalc>
+<PoolingCalc pass={passing} height={outputHeight} width={outputWidth} channels={outputChannels}
+
+changeWidth={setInputWidth}
+changeHeight={setInputHeight}
+changeChannels={setInputChannels}
+
+changePass={()=> {
+      if (convRef.current) {
+   convRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+}}></PoolingCalc>
+
 
 
 <footer className="flex items-center justify-center w-full h-24 border-t">
-
+<div ref={poolingRef} />
 <p className="text-center">
   Built with care for my precious friends by {'Pawel Piwowarski'} 
   </p>
@@ -290,7 +334,6 @@ kernel_size = {kernelSize}, stride={stride}, padding={padding}) </code>
 See Github
     </p>
   </a>
-
 
 
 
