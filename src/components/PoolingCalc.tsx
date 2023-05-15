@@ -62,7 +62,7 @@ export default function PoolingCalc() {
         <div className="flex items-center space-x-4">
           <label htmlFor="inputWidth">Input Width:</label>
           <input 
-          className="range range-accent"
+          className="range range-info"
             type="range"
             min="1"
             max="128"
@@ -86,7 +86,7 @@ className="input"
         <div className="flex items-center space-x-4">
           <label htmlFor="inputHeight">Input Height:</label>
           <input
-            className="range range-accent"
+            className="range range-info"
 
             type="range"
             min="1"
@@ -108,7 +108,7 @@ className="input"
         <div className="flex items-center space-x-4">
           <label htmlFor="inputChannels">Input Channels:</label>
           <input
-            className="range range-accent"
+            className="range range-info"
             type="range"
             min="1"
             max="100"
@@ -133,7 +133,7 @@ className="input"
   <div className="flex items-center space-x-4">
   <label htmlFor="kernelSize">Kernel Size:</label>
   <input 
-    className="range range-accent"
+    className="range range-info"
     type="range"
     min="1"
     max="100"
@@ -152,9 +152,9 @@ className="input"
   />
 </div>
 <div className="flex items-center space-x-4">
-          <label className="text-orange-800" htmlFor="inputHeight">Padding: (Usually 0 in pooling)</label>
+          <label className="text-orange-600" htmlFor="inputHeight">Padding: (Usually 0 in pooling)</label>
           <input
-            className="range range-accent"
+            className="range range-info"
 
             type="range"
             min="0"
@@ -180,7 +180,7 @@ className="input"
         <div className="flex items-center space-x-4">
           <label htmlFor="inputChannels">Stride:</label>
           <input
-            className="range range-accent"
+            className="range range-info"
             type="range"
             min="1"
             max="10"
@@ -201,7 +201,7 @@ className="input"
         <div className="flex items-center space-x-4">
         <label htmlFor="outputChannels">Output Channels:</label>
         <input 
-className="range range-accent"
+className="range range-info"
           type="range"
           min="1"
           max="100"
