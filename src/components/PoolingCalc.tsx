@@ -1,38 +1,39 @@
-import { useState, useEffect } from 'react';
-import PoolingCalc from '@/components/PoolingCalc';
 
 
-export default function ConvolutionCalculator() {
-  const [inputWidth, setInputWidth] = useState(1);
-  const [inputHeight, setInputHeight] = useState(1);
-  const [inputChannels, setInputChannels] = useState(1);
-  const [kernelSize, setKernelSize] = useState(1);
-  const [padding, setPadding] = useState(0);
-  const [stride, setStride] = useState(1);
-  const [outputChannels, setOutputChannels] = useState(1);
-  const [outputWidth, setOutputWidth] = useState(0);
-  const [outputHeight, setOutputHeight] = useState(0);
+import { useState, useEffect } from "react";
 
-  useEffect(() => {
+export default function PoolingCalc() {
 
-  
-    const outputWidth = Math.floor(
-      (inputWidth + 2 * padding - kernelSize) / stride + 1
-    );
-    const outputHeight = Math.floor(
-      (inputHeight + 2 * padding - kernelSize) / stride + 1
-    );
+    const [inputWidth, setInputWidth] = useState(1);
+    const [inputHeight, setInputHeight] = useState(1);
+    const [inputChannels, setInputChannels] = useState(1);
+    const [kernelSize, setKernelSize] = useState(1);
+    const [padding, setPadding] = useState(0);
+    const [stride, setStride] = useState(1);
+    const [outputChannels, setOutputChannels] = useState(1);
+    const [outputWidth, setOutputWidth] = useState(0);
+    const [outputHeight, setOutputHeight] = useState(0);
 
-    setOutputHeight(outputHeight);
-    setOutputWidth(outputWidth);
+    useEffect(() => {
+        const outputWidth = Math.floor(
+            (inputWidth + 2 * padding - kernelSize) / stride + 1
+          );
+          const outputHeight = Math.floor(
+            (inputHeight + 2 * padding - kernelSize) / stride + 1
+          );
 
-}, [inputWidth, inputHeight, kernelSize, padding, stride]);
+        setOutputHeight(outputHeight);
+        setOutputWidth(outputWidth);
 
-  return (
-    <div className="flex flex-col items-center space-y-4">
-    <div className="grid grid-cols-2 gap-4 pt-20">
+    }, [inputWidth, inputHeight, kernelSize, padding, stride]);
+
+
+    return (  
+
+        <div className="flex flex-col items-center space-y-4">
+<div className="grid grid-cols-2 gap-4 pt-10">
       <h1 className="col-span-3 text-3xl font-bold text-center pb-4">
-        Convolution Calculator
+        Pooling Calculator
       </h1>
 
       <div className="flex flex-col items-center space-y-12">
@@ -128,7 +129,6 @@ className="input"
     onBlur={(e) => setKernelSize(parseInt(e.target.value))}
   />
 </div>
-
 <div className="flex items-center space-x-4">
           <label htmlFor="inputHeight">Padding:</label>
           <input
@@ -153,6 +153,8 @@ className="input"
   />
 
         </div>
+
+
         <div className="flex items-center space-x-4">
           <label htmlFor="inputChannels">Stride:</label>
           <input
@@ -197,18 +199,15 @@ className="range range-accent"
   />
 
       </div>
-  
-  </div>
+      
 
+      </div>
+      
 
+    
+      </div>
 
-
-
-  </div>
-
-
-
-{
+      {
  outputWidth > 0 && (
     <div className="flex flex-col items-center space-y-4">
       <h1 className="text-2xl font-bold text-center pb-4">
@@ -220,41 +219,18 @@ className="range range-accent"
       </div>
       <div className="mockup-code">
       <pre data-prefix=">" className="text-success"><code>PyTorch</code></pre>
-<code>  torch.nn.Conv2d(in_channels = {inputChannels}, out_channels = {outputChannels}, 
+<code>  torch.nn.MaxPool2d(
 kernel_size = {kernelSize}, stride={stride}, padding={padding}) </code>
 </div>
-      
 
     </div>
   )
 
 }
 
-<PoolingCalc ></PoolingCalc>
-
-
-<footer className="flex items-center justify-center w-full h-24 border-t">
-
-<p className="text-center">
-  Built by {'Pawel Piwowarski'} 
-  </p>
-  <a className="ml-2" href="https://github.com/pawelpiwowarski"
-  target="_blank"
-  rel="noopener noreferrer"
-  >
-    <p className="text-center underline">
-
-Github
-    </p>
-  </a>
+      </div>
 
 
 
-
-
-</footer>
-
-</div>
-  );
-    
+    )
 }
