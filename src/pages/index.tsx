@@ -1,18 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function ConvolutionCalculator() {
-  const [inputWidth, setInputWidth] = useState(0);
-  const [inputHeight, setInputHeight] = useState(0);
-  const [inputChannels, setInputChannels] = useState(0);
+  const [inputWidth, setInputWidth] = useState(1);
+  const [inputHeight, setInputHeight] = useState(1);
+  const [inputChannels, setInputChannels] = useState(1);
   const [kernelSize, setKernelSize] = useState(1);
   const [padding, setPadding] = useState(0);
   const [stride, setStride] = useState(1);
-  const [outputChannels, setOutputChannels] = useState(0);
+  const [outputChannels, setOutputChannels] = useState(1);
   const [outputWidth, setOutputWidth] = useState(0);
   const [outputHeight, setOutputHeight] = useState(0);
 
+  useEffect(() => {
 
-  const calculateOutputSize = () => {
+  
     const outputWidth = Math.floor(
       (inputWidth + 2 * padding - kernelSize) / stride + 1
     );
@@ -22,23 +23,24 @@ export default function ConvolutionCalculator() {
 
     setOutputHeight(outputHeight);
     setOutputWidth(outputWidth);
-  };
+
+}, [inputWidth, inputHeight, kernelSize, padding, stride]);
 
   return (
     <div className="flex flex-col items-center space-y-4">
-    <div className="grid grid-cols-3 gap-4 pt-20">
+    <div className="grid grid-cols-2 gap-4 pt-20">
       <h1 className="col-span-3 text-3xl font-bold text-center pb-4">
         Convolution Calculator
       </h1>
 
-      <div className="flex flex-col items-center space-y-4">
+      <div className="flex flex-col items-center space-y-12">
         <div className="flex items-center space-x-4">
           <label htmlFor="inputWidth">Input Width:</label>
           <input 
           className="range range-accent"
             type="range"
-            min="0"
-            max="100"
+            min="1"
+            max="128"
             value={inputWidth}
             onChange={(e) => setInputWidth(parseInt(e.target.value))}
             id="inputWidth"
@@ -47,8 +49,8 @@ export default function ConvolutionCalculator() {
 
 className="input"
             type="number"
-            min="0"
-            max="100"
+            min="1"
+            max="128"
             value={inputWidth}
             onChange={(e) => setInputWidth(parseInt(e.target.value))}
             onBlur={(e) => setInputWidth(parseInt(e.target.value))}
@@ -62,8 +64,8 @@ className="input"
             className="range range-accent"
 
             type="range"
-            min="0"
-            max="100"
+            min="1"
+            max="128"
             value={inputHeight}
             onChange={(e) => setInputHeight(parseInt(e.target.value))}
             id="inputHeight"
@@ -71,8 +73,8 @@ className="input"
   <input 
     className="input"
     type="number"
-    min="0"
-    max="100"
+    min="1"
+    max="128"
     value={inputHeight  }
     onChange={(e) => setInputHeight(parseInt(e.target.value))}
     onBlur={(e) => setInputHeight(parseInt(e.target.value))}
@@ -83,7 +85,7 @@ className="input"
           <input
             className="range range-accent"
             type="range"
-            min="0"
+            min="1"
             max="100"
             value={inputChannels}
             onChange={(e) => setInputChannels(parseInt(e.target.value))}
@@ -92,7 +94,7 @@ className="input"
   <input 
     className="input"
     type="number"
-    min="0"
+    min="1"
     max="100"
     value={inputChannels  }
     onChange={(e) => setInputChannels(parseInt(e.target.value))}
@@ -102,7 +104,7 @@ className="input"
        
   
   </div>
-  <div className="flex flex-col items-center space-y-4">
+  <div className="flex flex-col  space-y-4">
   <div className="flex items-center space-x-4">
   <label htmlFor="kernelSize">Kernel Size:</label>
   <input 
@@ -125,7 +127,7 @@ className="input"
   />
 </div>
 
-        <div className="flex items-center space-x-4 pt-4">
+<div className="flex items-center space-x-4">
           <label htmlFor="inputHeight">Padding:</label>
           <input
             className="range range-accent"
@@ -149,7 +151,7 @@ className="input"
   />
 
         </div>
-        <div className="flex items-center space-x-4 pt-6" >
+        <div className="flex items-center space-x-4">
           <label htmlFor="inputChannels">Stride:</label>
           <input
             className="range range-accent"
@@ -170,20 +172,12 @@ className="input"
     onBlur={(e) => setStride(parseInt(e.target.value))}
   />
         </div>
-       
-  
-  </div>
-
-
-  <div className="mt-4">
-
-
-      <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4">
         <label htmlFor="outputChannels">Output Channels:</label>
         <input 
 className="range range-accent"
           type="range"
-          min="0"
+          min="1"
           max="100"
           value={outputChannels}
           onChange={(e) => setOutputChannels(parseInt(e.target.value))}
@@ -193,7 +187,7 @@ className="range range-accent"
 <input 
     className="input"
     type="number"
-    min="0"
+    min="1"
     max="100"
     value={outputChannels}
     onChange={(e) => setOutputChannels(parseInt(e.target.value))}
@@ -201,18 +195,16 @@ className="range range-accent"
   />
 
       </div>
-<div className="flex items-center space-x-4 p-4 ml-6">
+  
+  </div>
 
-    <button onClick={() => console.log(calculateOutputSize())} className="btn btn-outline btn-info">      Calculate Output Size</button>
-</div>
-    </div>
+
+
 
 
   </div>
 
-  <div className="flex flex-col items-center space-y-4">
 
-</div>
 
 {
  outputWidth > 0 && (
