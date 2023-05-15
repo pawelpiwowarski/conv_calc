@@ -279,7 +279,7 @@ kernel_size = {kernelSize}, stride={stride}, padding={padding}) </code>
 <footer className="flex items-center justify-center w-full h-24 border-t">
 
 <p className="text-center">
-  Built with care by {'Pawel Piwowarski'} 
+  Built with care for my precious friends by {'Pawel Piwowarski'} 
   </p>
   <a className="ml-2" href="https://github.com/pawelpiwowarski"
   target="_blank"
