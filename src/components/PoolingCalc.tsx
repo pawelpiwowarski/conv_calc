@@ -20,7 +20,7 @@ export default function PoolingCalc() {
 
 
   function handleKerasCopyClick() {
-    const code = ` tf.keras.layers.Conv2D(filters=${outputChannels}, kernel_size=${kernelSize}, strides=${stride}, padding=${padding? "same" : "valid"}, input_shape=(${inputWidth}, ${inputHeight}, ${inputChannels}))`;
+    const code = `tf.keras.layers.MaxPool2D( pool_size = ${kernelSize}, strides = ${stride}, padding = ${padding? 'same': 'valid' }) `
     navigator.clipboard.writeText(code).then(() => {
       setIsKerasCopied(true);
       setTimeout(() => setIsKerasCopied(false), 2000);
@@ -255,7 +255,7 @@ kernel_size = {kernelSize}, stride={stride}, padding={padding}) </code>
  { isKerasCopied ? "Copied!" : "Copy to Clipboard"}
 </button>
 <pre data-prefix=">" className="text-orange-400"><code>Keras</code></pre>
-<code className="text-orange-400 ml-4" > tf.keras.layers.Conv2D(filters = {outputChannels}, kernel_size = {kernelSize}, strides = {stride}, padding = {padding? 'same': 'valid' }) </code>
+<code className="text-orange-400 ml-4" > tf.keras.layers.MaxPool2D( pool_size = {kernelSize}, strides = {stride}, padding = {padding? 'same': 'valid' }) </code>
 </div>
 
     </div>
