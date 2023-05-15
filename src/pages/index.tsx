@@ -29,7 +29,7 @@ export default function ConvolutionCalculator() {
     setPassing(!passing);
 
     if (poolingRef.current) {
-      poolingRef.current.scrollIntoView({ behavior: "smooth" });
+      poolingRef.current.scrollIntoView({ behavior: "smooth",  });
     }
   };
 
@@ -305,7 +305,7 @@ kernel_size = {kernelSize}, stride={stride}, padding={padding}) </code>
   )
 
 }
-
+<div ref={poolingRef} />
 <PoolingCalc pass={passing} height={outputHeight} width={outputWidth} channels={outputChannels}
 
 changeWidth={setInputWidth}
@@ -321,7 +321,7 @@ changePass={()=> {
 
 
 <footer className="flex items-center justify-center w-full h-24 border-t">
-<div ref={poolingRef} />
+
 <p className="text-center">
   Built with care for my precious friends by {'Pawel Piwowarski'} 
   </p>

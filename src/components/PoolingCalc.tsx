@@ -71,9 +71,15 @@ export default function PoolingCalc(props: PoolingCalcProps) {
     }, [inputWidth, inputHeight, kernelSize, padding, stride]);
 
     useEffect(() => {
+
+      if (props.width !== 0 && props.height !== 0 && props.channels !== 0) {
+
+
         setInputWidth(props.width);
         setInputHeight(props.height);
         setInputChannels(props.channels);
+
+      }
     }, [props.pass]);
 
 
