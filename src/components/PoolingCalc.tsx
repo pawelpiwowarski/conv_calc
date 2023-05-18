@@ -85,7 +85,10 @@ export default function PoolingCalc(props: PoolingCalcProps) {
 
     return (  
 
+      
+
         <div className="flex flex-col items-center space-y-4">
+          
 <div className="grid grid-cols-2 gap-4 pt-10">
       <h1 className="col-span-3 text-4xl font-bold text-center pb-4">
         Pooling Calculator
@@ -262,13 +265,18 @@ className="range range-info"
     
       </div>
 
+     
+
       {
  outputWidth > 0 && (
+
     <div className="flex flex-col items-center space-y-4">
+
+      
       <h1 className="text-2xl pt-4 text-center pb-4">
         Output Size: {outputWidth} x {outputHeight} x {outputChannels}
       </h1>
-  
+
 
       <div className="flex items-center space-x-4 text-2xl">
 <p className="text-2xl"> After Flattening: {outputWidth * outputHeight * outputChannels} </p>
@@ -287,9 +295,15 @@ className="range range-info"
 
 </button>
 }
+
+{ <div className="w-96 h-120 pt-20">
+      <PoolingAnimation width={inputWidth} height={inputHeight} channels={inputChannels} kernelSize={kernelSize} stride={stride} padding={padding} />
+
+      </div>
+      }
       <div className="mockup-code">
       <button className="btn gap-2" onClick={handleCopyClick}>
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
  { isCopied ? "Copied!" : "Copy to Clipboard"}
 </button>
       <pre data-prefix=">" className="text-success"><code>PyTorch</code></pre>
@@ -299,7 +313,7 @@ kernel_size = {kernelSize}, stride={stride}, padding={padding}) </code>
 
 <button className="btn gap-2" onClick={handleKerasCopyClick}>
 
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
  { isKerasCopied ? "Copied!" : "Copy to Clipboard"}
 </button>
 <pre data-prefix=">" className="text-orange-400"><code>Keras</code></pre>
@@ -310,6 +324,7 @@ kernel_size = {kernelSize}, stride={stride}, padding={padding}) </code>
   )
 
 }
+
 
 
 

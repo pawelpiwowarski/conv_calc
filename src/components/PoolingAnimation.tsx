@@ -1,5 +1,43 @@
-import React, { useEffect, useRef } from 'react';
-import * as THREE from 'three';
+import React, { useRef, useState } from 'react'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
+
+type BoxProps = {
+  color: string;
+  position: [number, number, number];
+};
+
+function Box(props: BoxProps) {
+  const { viewport, camera } = useThree()
+  const { width, height } = viewport.getCurrentViewport(camera, [0, 0, 0])
+
+  const ref = useRef<THREE.Mesh>(null);
+  const [hovered, setHovered] = useState(false);
+  const [clicked, setClicked] = useState(false);
+
+  // Animation logic
+  useFrame((state, delta) => {
+    if (ref.current) {
+      ref.current.rotation.x += 0.01;
+      ref.current.rotation.y += 0.01;
+    }
+  });
+  
+
+
+  return (
+    <mesh
+      {...props}
+      ref={ref}
+      onClick={() => setClicked(!clicked)}
+      onPointerOver={() => setHovered(true)}
+      onPointerOut={() => setHovered(false)}
+    >
+      <boxGeometry args={[1, 1, 0.5]} />
+      <meshStandardMaterial color={hovered ? 'pink' : props.color} />
+    </mesh>
+  );
+}
 
 type MySceneProps = {
   width: number;
@@ -11,62 +49,40 @@ type MySceneProps = {
 };
 
 const MyScene = (props: MySceneProps) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  useEffect(() => {
-    if (canvasRef.current) {
-      // Set up the Three.js scene
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-      const renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current });
-      renderer.setSize(window.innerWidth, window.innerHeight);
 
-      // Calculate the size of each pixel
-      const pixelSize = 0.5;
 
-      // Calculate the size of the cube
-      const cubeWidth = props.width * pixelSize;
-      const cubeHeight = props.height * pixelSize;
 
-      // Add a cube to the scene
-      const geometry = new THREE.BoxGeometry(pixelSize, pixelSize, 0);
-      const material = new THREE.MeshBasicMaterial({ color: 0xFFFFFF, side: THREE.FrontSide });
+  if (props.height * props.width * props.channels > 1 && props.height * props.width * props.channels < 500) {
+    return (
+      <Canvas gl={{ antialias: false }} dpr={[1, 1.5]} camera={{ position: [0, 0, 5]}}>
+        <ambientLight intensity={0.5} />
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+        <pointLight position={[-10, -10, -10]} />
 
-      // Add borders to each pixel
-      for (let x = 0; x < props.width; x++) {
-        for (let y = 0; y < props.height; y++) {
-          const cube = new THREE.Mesh(geometry, material);
-          cube.position.set(
-            (x - props.width / 2) * pixelSize,
-            (y - props.height / 2) * pixelSize,
-            0
-          );
-          scene.add(cube);
+        {Array.from({ length: props.height }, (_, i) => (
+          Array.from({ length: props.width }, (_, j) => (
+            Array.from({ length: props.channels }, (_, k) => {
+              const isBlueBox = i < props.kernelSize && j < props.kernelSize;
+   
 
-          // Add black border
-          const borderGeometry = new THREE.BoxGeometry(pixelSize + 0.1, pixelSize + 0.1, 0);
+              return (
+                <Box
+                  key={`${i}-${j}-${k}`}
+                  color={isBlueBox ? 'blue' : 'orange'}
+                  position={[i, j, k]}
+                />
+              );
+            })
+          ))
+        ))}
 
-          const borderMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, side: THREE.BackSide });
-          const border = new THREE.Mesh(borderGeometry, borderMaterial);
-          border.position.copy(cube.position);
-          scene.add(border);
-        }
-      }
-
-      // Move the camera back
-      camera.position.z = 5;
-
-      // Render the scene
-      const animate = () => {
-        requestAnimationFrame(animate);
-
-        renderer.render(scene, camera);
-      };
-      animate();
-    }
-  }, [props.height, props.width, props.channels, props.kernelSize, props.stride, props.padding]);
-
-  return <canvas ref={canvasRef} />;
+        <OrbitControls />
+      </Canvas>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default MyScene;
