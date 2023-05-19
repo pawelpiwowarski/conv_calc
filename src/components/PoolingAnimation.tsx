@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import React, { useRef, useState } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
 
 type BoxProps = {
   color: string;
@@ -8,8 +8,8 @@ type BoxProps = {
 };
 
 function Box(props: BoxProps) {
-  const { viewport, camera } = useThree()
-  const { width, height } = viewport.getCurrentViewport(camera, [0, 0, 0])
+  const { viewport, camera } = useThree();
+  const { width, height } = viewport.getCurrentViewport(camera, [0, 0, 0]);
 
   const ref = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
@@ -22,8 +22,6 @@ function Box(props: BoxProps) {
       ref.current.rotation.y += 0.01;
     }
   });
-  
-
 
   return (
     <mesh
@@ -51,33 +49,44 @@ type MySceneProps = {
 const MyScene = (props: MySceneProps) => {
 
 
-
-
   if (props.height * props.width * props.channels > 1 && props.height * props.width * props.channels < 500) {
+    const totalWidth = props.width + props.padding * 2;
+    const totalHeight = props.height + props.padding * 2;
+
     return (
-      <Canvas gl={{ antialias: false }} dpr={[1, 1.5]} camera={{ position: [0, 0, 5]}}>
+      <Canvas gl={{ antialias: false }} dpr={[1, 1.5]} camera={{ position: [0, 0, 5] }}>
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />
 
-        {Array.from({ length: props.height }, (_, i) => (
-          Array.from({ length: props.width }, (_, j) => (
-            Array.from({ length: props.channels }, (_, k) => {
-              const isBlueBox = i < props.kernelSize && j < props.kernelSize;
-   
+        {Array.from({ length: totalHeight }, (_, i) => (
+          Array.from({ length: totalWidth }, (_, j) => {
+            const isOrangeBox =
+              i >= props.padding &&
+              i < totalHeight - props.padding &&
+              j >= props.padding &&
+              j < totalWidth - props.padding;
 
-              return (
-                <Box
-                  key={`${i}-${j}-${k}`}
-                  color={isBlueBox ? 'blue' : 'orange'}
-                  position={[i, j, k]}
-                />
-              );
-            })
-          ))
+            const isBlueBox =  
+              i     < props.kernelSize && j  < props.kernelSize;
+
+            return (
+              <Box
+                key={`${i}-${j}`}
+                color={isBlueBox ? 'blue' : isOrangeBox ? 'orange' : 'grey'}
+                position={[i - props.padding, j - props.padding, 0]}
+              />
+            );
+          })
         ))}
 
         <OrbitControls />
+
+
+
+
+
+
       </Canvas>
     );
   } else {

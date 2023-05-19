@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import PoolingCalc from '@/components/PoolingCalc';
 import Head from 'next/head';
 import { motion } from "framer-motion";
+import PoolingAnimation from "@/components/PoolingAnimation";
 
 
 export default function ConvolutionCalculator() {
@@ -283,6 +284,12 @@ className="range range-accent"
 
       </motion.button>
 }
+
+{ <div className="w-96 h-120 pt-20">
+      <PoolingAnimation width={inputWidth} height={inputHeight} channels={inputChannels} kernelSize={kernelSize} stride={stride} padding={padding} />
+
+      </div>
+      }
 
       <div className="mockup-code">
       <button className="btn gap-2" onClick={handleCopyClick}>
