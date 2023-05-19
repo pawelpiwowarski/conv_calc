@@ -59,7 +59,9 @@ const MyScene = (props: MySceneProps) => {
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />
 
-        {Array.from({ length: totalHeight }, (_, i) => (
+        {
+        Array.from({ length: props.channels }, (_, k) => (
+        Array.from({ length: totalHeight }, (_, i) => (
           Array.from({ length: totalWidth }, (_, j) => {
             const isOrangeBox =
               i >= props.padding &&
@@ -74,10 +76,12 @@ const MyScene = (props: MySceneProps) => {
               <Box
                 key={`${i}-${j}`}
                 color={isBlueBox ? 'blue' : isOrangeBox ? 'orange' : 'grey'}
-                position={[i - props.padding, j - props.padding, 0]}
+                position={[i - props.padding, j - props.padding, k]}
               />
             );
           })
+        ))
+      
         ))}
 
         <OrbitControls />
